@@ -1,23 +1,17 @@
 # Overview
-
-{Important!  Do not say in this section that this is college assignment.  Talk about what you are trying to accomplish as a software engineer to further your learning.}
-
-{Provide a description of your software}
-
-{Describe your purpose for creating this software.}
-
-{Provide a link to your YouTube demonstration.  It should be a one minute demo of the software running and a walkthrough of the code.}
+As a software engineer, I'm always looking to improve my skills and push the boundaries of what's possible with code. In this project, I set out to create a visually striking and interactive motorcycle wheel animation using HTML and CSS. My goal was to demonstrate my understanding of CSS animations and styling, while also creating a engaging and dynamic user experience.
+The software is a simple yet impressive motorcycle wheel animation that showcases my ability to create complex animations using CSS keyframes and transforms. The wheel spins, giving the illusion of movement and energy.
 
 [Software Demo Video](http://youtube.link.goes.here)
 
 # Development Environment
+To develop this software, I used the following tools:
 
-{Describe the tools that you used to develop the software}
-
-{Describe the programming language that you used}
+Visual Studio Code as my code editor
+Google Chrome as my web browser for testing and debugging
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+The following websites were instrumental in helping me complete this project:
+[W3Schools](https://www.w3schools.com/)
+[CSS-Tricks](https://css-tricks.com/)
