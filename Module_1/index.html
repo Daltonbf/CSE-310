@@ -47,53 +47,25 @@
   <div class="loading-indicator" id="loading-indicator">Loading...</div>
 
   <script type="module">
-    // Edamam API credentials
-    const APP_ID = '41bdfd5d';
-    const APP_KEY = '6c754439ddf1d4a5875400eb395d8d92';
+    import searchRecipes from './searchRecipes.js'; // Import the searchRecipes function
 
-    // Function to search for recipes using the Edamam API
-    async function searchRecipes(query) {
-      try {
-        // Construct the API request URL
-        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=${APP_ID}&app_key=${APP_KEY}`;
-        // Make the API request
-        const response = await fetch(url);
-        // Parse the API response as JSON
-        const recipes = await response.json();
-        // Return the search results
-        return recipes.hits;
-      } catch (error) {
-        // Log any errors that occur
-        console.error('Error:', error);
-        // Return an empty array if there's an error
-        return [];
-      }
-    }
-
-    // Get references to the search input, button, list, and loading indicator elements
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
     const recipeList = document.getElementById('recipe-list');
     const loadingIndicator = document.getElementById('loading-indicator');
 
-    // Add an event listener to the search button
     searchButton.addEventListener('click', async () => {
-      // Get the search query from the input field
       const query = searchInput.value.trim();
       if (!query) {
         alert('Please enter a search query');
         return;
       }
 
-      // Show the loading indicator
       loadingIndicator.style.display = 'block';
 
       try {
-        // Search for recipes using the Edamam API
-        const recipes = await searchRecipes(query);
-        // Clear the recipe list
+        const recipes = await searchRecipes(query); // Call the searchRecipes function
         recipeList.innerHTML = '';
-        // Loop through the search results and create list items
         recipes.forEach((recipe) => {
           const recipeItem = document.createElement('li');
           const recipeImage = document.createElement('img');
@@ -112,12 +84,9 @@
           recipeList.appendChild(recipeItem);
         });
       } catch (error) {
-        // Log any errors that occur
         console.error('Error:', error);
-        // Display an error message to the user
         alert('Error fetching recipes. Please try again later.');
       } finally {
-        // Hide the loading indicator
         loadingIndicator.style.display = 'none';
       }
     });
