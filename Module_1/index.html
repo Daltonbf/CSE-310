@@ -5,89 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe Finder</title>
   <style>
+    /* Styles for the recipe list */
     body {
       font-family: Arial, sans-serif;
     }
-   .recipe-list {
+    .recipe-list {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-   .recipe-list li {
+    .recipe-list li {
       padding: 20px;
       border-bottom: 1px solid #ccc;
       display: flex;
       align-items: center;
     }
-   .recipe-list li:last-child {
-      border-bottom: none;
-    }
-   .recipe-image {
+    .recipe-image {
       width: 100px;
       height: 100px;
       margin-right: 20px;
       border-radius: 10px;
     }
-   .recipe-info {
+    .recipe-info {
       flex: 1;
     }
-   .recipe-info h2 {
-      margin-top: 0;
-    }
-   .recipe-info p {
-      margin-bottom: 10px;
-    }
-   .recipe-info.calories {
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 10px;
+    .loading-indicator {
+      text-align: center;
+      padding: 20px;
     }
   </style>
 </head>
 <body>
   <h1>Recipe Finder</h1>
+  <!-- Input field for searching recipes -->
   <input type="text" id="search-input" placeholder="Search for a recipe...">
+  <!-- Button to trigger the search -->
   <button id="search-button">Search</button>
+  <!-- List to display the search results -->
   <ul class="recipe-list" id="recipe-list"></ul>
+  <!-- Loading indicator -->
+  <div class="loading-indicator" id="loading-indicator">Loading...</div>
 
   <script type="module">
-    import searchRecipes from './recipeFinder.mjs';
+    // Edamam API credentials
+    const APP_ID = '41bdfd5d';
+    const APP_KEY = '6c754439ddf1d4a5875400eb395d8d92';
 
+    // Function to search for recipes using the Edamam API
+    async function searchRecipes(query) {
+      try {
+        // Construct the API request URL
+        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=${APP_ID}&app_key=${APP_KEY}`;
+        // Make the API request
+        const response = await fetch(url);
+        // Parse the API response as JSON
+        const recipes = await response.json();
+        // Return the search results
+        return recipes.hits;
+      } catch (error) {
+        // Log any errors that occur
+        console.error('Error:', error);
+        // Return an empty array if there's an error
+        return [];
+      }
+    }
+
+    // Get references to the search input, button, list, and loading indicator elements
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
     const recipeList = document.getElementById('recipe-list');
+    const loadingIndicator = document.getElementById('loading-indicator');
 
+    // Add an event listener to the search button
     searchButton.addEventListener('click', async () => {
+      // Get the search query from the input field
       const query = searchInput.value.trim();
-      if (query) {
-        try {
-          const recipes = await searchRecipes(query);
-          console.log('Received recipes:', recipes);
-          recipeList.innerHTML = '';
-          recipes.forEach((recipe) => {
-            const recipeItem = document.createElement('li');
-            const recipeImage = document.createElement('img');
-            recipeImage.src = recipe.recipe.image;
-            recipeImage.className = 'ecipe-image';
-            const recipeInfo = document.createElement('div');
-            recipeInfo.className = 'ecipe-info';
-            const recipeTitle = document.createElement('h2');
-            recipeTitle.textContent = recipe.recipe.label;
-            const recipeDescription = document.createElement('p');
-            recipeDescription.textContent = recipe.recipe.source;
-            const recipeCalories = document.createElement('p');
-            recipeCalories.className = 'calories';
-            recipeCalories.textContent = `Calories: ${recipe.recipe.calories.toFixed(2)}`;
-            recipeInfo.appendChild(recipeTitle);
-            recipeInfo.appendChild(recipeDescription);
-            recipeInfo.appendChild(recipeCalories);
-            recipeItem.appendChild(recipeImage);
-            recipeItem.appendChild(recipeInfo);
-            recipeList.appendChild(recipeItem);
-          });
-        } catch (error) {
-          console.error('Error:', error);
-        }
+      if (!query) {
+        alert('Please enter a search query');
+        return;
+      }
+
+      // Show the loading indicator
+      loadingIndicator.style.display = 'block';
+
+      try {
+        // Search for recipes using the Edamam API
+        const recipes = await searchRecipes(query);
+        // Clear the recipe list
+        recipeList.innerHTML = '';
+        // Loop through the search results and create list items
+        recipes.forEach((recipe) => {
+          const recipeItem = document.createElement('li');
+          const recipeImage = document.createElement('img');
+          recipeImage.src = recipe.recipe.image;
+          recipeImage.alt = `Image of ${recipe.recipe.label}`;
+          const recipeInfo = document.createElement('figcaption');
+          recipeInfo.innerHTML = `
+            <h2>${recipe.recipe.label}</h2>
+            <p>Source: ${recipe.recipe.source}</p>
+            <p>Calories: ${recipe.recipe.calories.toFixed(2)}</p>
+          `;
+          const recipeFigure = document.createElement('figure');
+          recipeFigure.appendChild(recipeImage);
+          recipeFigure.appendChild(recipeInfo);
+          recipeItem.appendChild(recipeFigure);
+          recipeList.appendChild(recipeItem);
+        });
+      } catch (error) {
+        // Log any errors that occur
+        console.error('Error:', error);
+        // Display an error message to the user
+        alert('Error fetching recipes. Please try again later.');
+      } finally {
+        // Hide the loading indicator
+        loadingIndicator.style.display = 'none';
       }
     });
   </script>
