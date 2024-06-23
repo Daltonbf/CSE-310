@@ -1,40 +1,30 @@
-**Recipe Finder**
-================
+# Overview
 
-A simple web application that allows users to search for recipes using the Edamam API.
+As a software engineer, I aimed to create a comprehensive application that showcases my understanding of JavaScript syntax and its capabilities. This project demonstrates my ability to design and implement a functional application that integrates various features and libraries.
 
-Youtube Link https://youtu.be/F-GSv4R14xI
+The software I wrote is a [briefly describe the application and its features]. My purpose for writing this software was to further my learning in JavaScript and to explore its applications in real-world scenarios.
 
-**Getting Started**
----------------
+[Software Demo Video](https://youtu.be/F-GSv4R14xI)
 
-### Prerequisites
+# Development Environment
 
-* A web browser (e.g. Google Chrome, Mozilla Firefox)
-* An Edamam API key and ID (sign up for a free account on the Edamam website)
+To develop this software, I used Visual Studio Code as my integrated development environment (IDE). I also utilized the Node.js runtime environment to execute my JavaScript code.
 
-### Installation
+I wrote the software in JavaScript, leveraging its built-in features and syntax. Additionally, I incorporated third-party libraries such as [list libraries used, e.g., Express.js, jQuery, etc.] to enhance the application's functionality.
 
-1. Clone or download the repository to your local machine.
-2. Open the `index.html` file in a web browser.
-3. Replace the `APP_ID` and `APP_KEY` variables in the JavaScript code with your own Edamam API credentials.
+# Useful Websites
 
-**Usage**
------
+The following websites were instrumental in helping me complete this project:
 
-1. Enter a search query in the input field (e.g. "chicken recipes", "vegan desserts", etc.).
-2. Click the "Search" button to retrieve a list of recipes from the Edamam API.
-3. Browse through the search results, which include recipe images, labels, sources, and calorie information.
+- [Mozilla Developer Network (MDN)](https://developer.mozilla.org/)
+- [W3Schools](https://www.w3schools.com/)
+- [Stack Overflow](https://stackoverflow.com/)
 
-**Technical Details**
--------------------
+# Future Work
 
-### API Integration
+Despite my best efforts, there are still several areas that require improvement and attention. In the future, I plan to:
 
-The Recipe Finder application uses the Edamam API to retrieve recipe data. The API request is made using the `fetch` API, and the response is parsed as JSON.
-
-**Example Code**
-```javascript
-const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=${41bdfd5d}&app_key=${7f2091ec55463781d65b0ddcd451ecac}`;
-const response = await fetch(url);
-const recipes = await response.json();
+- Resolve the issues with user authentication and authorization
+- Optimize the core application logic for better performance
+- Implement additional features and functionality to enhance the user experience
+- Refactor the code to improve readability and maintainability
