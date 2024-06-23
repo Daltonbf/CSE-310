@@ -16,7 +16,7 @@ I wrote the software in JavaScript, leveraging its built-in features and syntax.
 
 The following websites were instrumental in helping me complete this project:
 
-- [Mozilla Developer Network (MDN)](https://developer.mozilla.org/)
+- [One of my previous projects in GitHub](https://daltonbf.github.io/cse121b/project.html)
 - [W3Schools](https://www.w3schools.com/)
 - [Stack Overflow](https://stackoverflow.com/)
 
