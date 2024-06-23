@@ -14,5 +14,7 @@ Google Chrome as my web browser for testing and debugging
 # Useful Websites
 
 The following websites were instrumental in helping me complete this project:
+
 [W3Schools](https://www.w3schools.com/)
+
 [CSS-Tricks](https://css-tricks.com/)
