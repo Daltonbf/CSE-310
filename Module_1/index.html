@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+   .recipe-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+   .recipe-list li {
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+    }
+   .recipe-list li:last-child {
+      border-bottom: none;
+    }
+   .recipe-image {
+      width: 100px;
+      height: 100px;
+      margin-right: 20px;
+      border-radius: 10px;
+    }
+   .recipe-info {
+      flex: 1;
+    }
+   .recipe-info h2 {
+      margin-top: 0;
+    }
+   .recipe-info p {
+      margin-bottom: 10px;
+    }
+   .recipe-info.calories {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Recipe Finder</h1>
+  <input type="text" id="search-input" placeholder="Search for a recipe...">
+  <button id="search-button">Search</button>
+  <ul class="recipe-list" id="recipe-list"></ul>
+
+  <script type="module">
+    import searchRecipes from './recipeFinder.mjs';
+
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const recipeList = document.getElementById('recipe-list');
+
+    searchButton.addEventListener('click', async () => {
+      const query = searchInput.value.trim();
+      if (query) {
+        try {
+          const recipes = await searchRecipes(query);
+          console.log('Received recipes:', recipes);
+          recipeList.innerHTML = '';
+          recipes.forEach((recipe) => {
+            const recipeItem = document.createElement('li');
+            const recipeImage = document.createElement('img');
+            recipeImage.src = recipe.recipe.image;
+            recipeImage.className = 'ecipe-image';
+            const recipeInfo = document.createElement('div');
+            recipeInfo.className = 'ecipe-info';
+            const recipeTitle = document.createElement('h2');
+            recipeTitle.textContent = recipe.recipe.label;
+            const recipeDescription = document.createElement('p');
+            recipeDescription.textContent = recipe.recipe.source;
+            const recipeCalories = document.createElement('p');
+            recipeCalories.className = 'calories';
+            recipeCalories.textContent = `Calories: ${recipe.recipe.calories.toFixed(2)}`;
+            recipeInfo.appendChild(recipeTitle);
+            recipeInfo.appendChild(recipeDescription);
+            recipeInfo.appendChild(recipeCalories);
+            recipeItem.appendChild(recipeImage);
+            recipeItem.appendChild(recipeInfo);
+            recipeList.appendChild(recipeItem);
+          });
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
