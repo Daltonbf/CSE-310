@@ -33,6 +33,6 @@ The Recipe Finder application uses the Edamam API to retrieve recipe data. The A
 
 **Example Code**
 ```javascript
-const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=${APP_ID}&app_key=${APP_KEY}`;
+const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=${41bdfd5d}&app_key=${7f2091ec55463781d65b0ddcd451ecac}`;
 const response = await fetch(url);
 const recipes = await response.json();
