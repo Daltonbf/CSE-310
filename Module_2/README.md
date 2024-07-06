@@ -7,7 +7,7 @@ As a software engineer, I'm always looking to expand my skills and knowledge in 
 
 The calculator software I wrote is a command-line application that takes in mathematical expressions as input and evaluates them to produce the correct result. The purpose of this software is to showcase Erlang's ability to handle concurrent requests and its concise syntax for expressing complex logic.
 
-[Software Demo Video](https://youtu.be/my_youtube_video_link)
+[Software Demo Video](https://youtu.be/5M8C0OfB8LA)
 
 Development Environment
 ----------------------
