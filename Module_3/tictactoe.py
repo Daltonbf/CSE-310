@@ -19,8 +19,8 @@ def tic_tac_toe_game():
 
     # Load sound effects
     pygame.mixer.init()
-    x_sound = pygame.mixer.Sound('x_sound.wav')
-    o_sound = pygame.mixer.Sound('o_sound.wav')
+    x_sound = pygame.mixer.Sound('hit.wav')
+    o_sound = pygame.mixer.Sound('point.wav')
     winner_sound = pygame.mixer.Sound('winner.wav')
 
     # Game board

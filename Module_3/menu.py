@@ -5,6 +5,7 @@ import subprocess
 # Import game modules
 import pong
 import tictactoe
+import frogger
 
 # Pygame Initialization
 pygame.init()
@@ -23,7 +24,7 @@ BLACK = (0, 0, 0)
 font = pygame.font.Font(None, 72)
 
 # Menu options
-options = ["Pong", "Tic Tac Toe"]
+options = ["Pong", "Tic Tac Toe", "Frogger"]
 selected_option = 0
 
 # Function to draw menu
@@ -52,3 +53,8 @@ while True:
                     pong.pong_game()
                 elif selected_option == 1:
                     tictactoe.tic_tac_toe_game()
+                elif selected_option == 2:
+                    frogger.frogger_game()
+            if event.key == pygame.K_e:
+                pygame.init()  # Re-initialize Pygame
+                break  # Return to menu
